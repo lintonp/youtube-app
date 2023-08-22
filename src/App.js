@@ -1,13 +1,17 @@
 // import "./App.css";
 
+import Body from "./Components/Body";
+import Header from "./Components/Header";
+
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Header />
+      <Body />
       {/* *
       Head
       Body
-        Playlists section
+        Menu
         Main container
           Buttons with suggestions
           Video Cards
