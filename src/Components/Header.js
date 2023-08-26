@@ -23,7 +23,9 @@ const Header = () => {
         </button>
       </div>
       <div>
-        <button>Login</button>
+        <button className="rounded-full bg-orange-500 text-white font-semibold p-1 mx-4 my-2 w-8">
+          L
+        </button>
       </div>
     </div>
   );
