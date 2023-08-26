@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import VideoContainer from "./VideoContainer";
+import MainContent from "./MainContent";
 import { useSelector } from "react-redux";
 
 const Body = () => {
@@ -9,7 +9,7 @@ const Body = () => {
   return (
     <div className="flex">
       {menuFlag && <Menu />}
-      <VideoContainer />
+      <MainContent />
     </div>
   );
 };
