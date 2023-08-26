@@ -7,9 +7,15 @@ import menuImage from "../Utils/Images/menu.png";
 const Header = () => {
   const dispatch = useDispatch();
 
+  const handleMenuClick = () => {
+    console.log("clicked");
+    dispatch(toggleMenu());
+    //() => dispatch(toggleMenu())
+  };
+
   return (
     <div className="flex justify-between mx-2 my-1 px-2 py-3 shadow-md">
-      <button className="mx-4" onClick={() => dispatch(toggleMenu())}>
+      <button className="mx-4" onClick={handleMenuClick}>
         <img alt="Menu" src={menuImage} className="w-6 h-6" />
       </button>
       <div className="items-center flex">

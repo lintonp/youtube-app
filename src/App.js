@@ -6,12 +6,36 @@ import Header from "./Components/Header";
 
 import AppStore from "./Store/AppStore";
 
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import VideoContainer from "./Components/VideoContainer";
+import MainContent from "./Components/MainContent";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Body />,
+    children: [
+      {
+        path: "/",
+        element: <MainContent />,
+      },
+      {
+        path: "/watch",
+        element: <VideoContainer />,
+      },
+    ],
+  },
+]);
+
 function App() {
   return (
     <div>
       <Provider store={AppStore}>
         <Header />
-        <Body />
+        <RouterProvider router={router}>
+          <Outlet />
+          {/* <Body /> */}
+        </RouterProvider>
       </Provider>
       {/* *
       Head

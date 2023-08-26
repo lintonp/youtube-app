@@ -1,7 +1,6 @@
-import React from "react";
 import Menu from "./Menu";
-import MainContent from "./MainContent";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 const Body = () => {
   const menuFlag = useSelector((state) => state.menu.show);
@@ -9,7 +8,8 @@ const Body = () => {
   return (
     <div className="flex">
       {menuFlag && <Menu />}
-      <MainContent />
+      <Outlet />
+      {/* <MainContent /> */}
     </div>
   );
 };
