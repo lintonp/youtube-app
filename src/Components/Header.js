@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { toggleMenu } from "../Store/MenuSlice";
 import searchImage from "../Utils/Images/search.png";
 import menuImage from "../Utils/Images/menu.png";
+import youtubeLogo from "../Utils/Images/youtubeLogo.png";
+// import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,9 +17,16 @@ const Header = () => {
 
   return (
     <div className="flex justify-between mx-2 my-1 px-2 py-3 shadow-md">
-      <button className="mx-4" onClick={handleMenuClick}>
-        <img alt="Menu" src={menuImage} className="w-6 h-6" />
-      </button>
+      <div className="flex flex-wrap">
+        <button className="mx-4" onClick={handleMenuClick}>
+          <img alt="Menu" src={menuImage} className="w-6 h-6" />
+        </button>
+        <div className="m-1 ml-4">
+          <img alt="Menu" src={youtubeLogo} className="w-24 h-10" />
+          {/* <Link to="/">
+          </Link> */}
+        </div>
+      </div>
       <div className="items-center flex">
         <input
           type="text"
