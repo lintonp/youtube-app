@@ -5,16 +5,12 @@ const ButtonsList = () => {
     "All",
     "React",
     "Javascript",
-    "Tailwind",
+    "Tailwind CSS",
     "HTML",
-    "Mixes",
-    "Music",
-    "Live",
-    "Playlists",
-    "Football",
-    "Cricket",
-    "News",
-    "Gaming",
+    "React Router DOM",
+    "Redux",
+    "Lazy Loading",
+    "Debouncing",
   ];
   return (
     <div className="flex">
