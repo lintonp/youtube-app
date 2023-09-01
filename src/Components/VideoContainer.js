@@ -16,7 +16,7 @@ const VideoContainer = () => {
 
   return (
     <div className="">
-      <div className="flex">
+      <div className="flex m-2">
         <iframe
           width="800"
           height="450"
