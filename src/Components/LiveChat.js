@@ -17,21 +17,21 @@ const LiveChat = () => {
           message: generateRandomString(20),
         })
       );
-    }, 5000);
+    }, 2000);
     return () => {
       clearInterval(interval);
     };
   });
 
   const handleLiveChatMessage = () => {
-    dispatch(addMessage({ name: "UserName", message: chatMessage }));
+    dispatch(addMessage({ name: "You", message: chatMessage }));
     setChatMessage("");
   };
 
   return (
     <div>
       <h2 className="ml-4 justify-center font-semibold">Live Chat</h2>
-      <div className="mx-2 p-2 bg-slate-50 shadow-md w-full h-[425px] overflow-y-scroll flex flex-col divide-y divide-slate-200">
+      <div className="mx-2 p-2 bg-slate-50 shadow-md w-full h-[425px] overflow-y-scroll flex flex-col-reverse divide-y divide-slate-200">
         {liveChat.map((item, index) => (
           <LiveChatSingle key={index} name={item.name} message={item.message} />
         ))}
@@ -40,24 +40,24 @@ const LiveChat = () => {
         message="Hey there, I am using live Chat!"
       />
       <LiveChatSingle name="Quinton Pereira" message="Cool Feature!" /> */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+          className="p-2 bg-slate-200 rounded-lg"
+        >
+          <input
+            type="text"
+            className="ml-2 p-2 w-[230px] rounded-lg"
+            value={chatMessage}
+            placeholder="Say Something..."
+            onChange={(e) => setChatMessage(e.target.value)}
+          />
+          <button onClick={handleLiveChatMessage} className="ml-1 p-1">
+            Send
+          </button>
+        </form>
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        className="p-2 h-[25px]"
-      >
-        <input
-          type="text"
-          className="ml-2 p-2 w-[230px] border border-hidden"
-          value={chatMessage}
-          placeholder="Say Something..."
-          onChange={(e) => setChatMessage(e.target.value)}
-        />
-        <button onClick={handleLiveChatMessage} className="ml-1 p-1">
-          Send
-        </button>
-      </form>
     </div>
   );
 };

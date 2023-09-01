@@ -1,10 +1,8 @@
-// import { generateRandomColor } from "../Utils/Helpers";
+import React from "react";
 
-const LiveChatSingle = ({ name, message }) => {
-  // const color = "bg-" + generateRandomColor() + "-500";
-  // console.log(color);
+const Comment = ({ name, comment }) => {
   return (
-    <div className="flex p-2">
+    <div className="flex w-[800px]">
       <button
         className={
           "rounded-full text-white font-semibold p-1 mx-3 my-2 w-8 bg-y bg-orange-500"
@@ -15,10 +13,10 @@ const LiveChatSingle = ({ name, message }) => {
       </button>
       <div>
         <p className="font-semibold">{name}</p>
-        <p>{message}</p>
+        <p>{comment}</p>
       </div>
     </div>
   );
 };
 
-export default LiveChatSingle;
+export default Comment;

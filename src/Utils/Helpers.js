@@ -35,6 +35,12 @@ const lastNames = [
   "Wilson", // ... and so on
 ];
 
+const colors = ["orange", "blue", "yellow"];
+
+export function generateRandomColor() {
+  return colors[getRandomIndex(colors)];
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }

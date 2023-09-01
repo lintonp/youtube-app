@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { collapseMenu } from "../Store/MenuSlice";
 import { useDispatch } from "react-redux";
 import LiveChat from "./LiveChat";
+import CommentsContainer from "./CommentsContainer";
 
 const VideoContainer = () => {
   const dispatch = useDispatch();
@@ -27,8 +28,12 @@ const VideoContainer = () => {
         ></iframe>
         {/* <div className="mx-2 p-2 shadow-md h-[450px] overflow-y-scroll"> */}
         <div width="250">
+          {/* Add show and Hide Live Chat */}
           <LiveChat />
         </div>
+      </div>
+      <div>
+        <CommentsContainer />
       </div>
     </div>
   );
