@@ -9,7 +9,7 @@ const chatSlice = createSlice({
     addMessage: (state, action) => {
       state.messages.push(action.payload);
     },
-    clearMessages: (state, action) => {
+    clearMessages: (state) => {
       state.messages.length = 0;
       // return { messages: [] };
     },

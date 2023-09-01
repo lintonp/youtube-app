@@ -20,7 +20,6 @@ const LiveChat = () => {
     }, 5000);
     return () => {
       clearInterval(interval);
-      //   dispatch(clearMessages());
     };
   });
 

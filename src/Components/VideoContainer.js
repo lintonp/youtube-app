@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { collapseMenu } from "../Store/MenuSlice";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
 import LiveChat from "./LiveChat";
 
 const VideoContainer = () => {
@@ -12,7 +11,7 @@ const VideoContainer = () => {
 
   useEffect(() => {
     dispatch(collapseMenu());
-  }, []);
+  }, [dispatch]); //Added dispatch for deploy in netlify
 
   return (
     <div className="">
