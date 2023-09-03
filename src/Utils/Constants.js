@@ -12,8 +12,11 @@ export const YOUTUBE_VIDEO_URL =
 // "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&videoId=el"
 
 export const YOUTUBE_SEARCH_API =
-  "https://youtube.googleapis.com/youtube/v3/comments?part=iphone&id=iphone&maxResults=12&key=" +
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=searchKeyword&key=" +
   Google_API_KEY;
+// export const YOUTUBE_SEARCH_API =
+//   "https://youtube.googleapis.com/youtube/v3/comments?part=iphone&id=iphone&maxResults=12&key=" +
+//   Google_API_KEY;
 
 export const YOUTUBE_SEARCH_FILTER =
   "https://youtube.googleapis.com/youtube/v3/search?location=IN&maxResults=25&order=viewCount&q=Music&key=" +
@@ -28,3 +31,10 @@ export const YOUTUBE_SEARCH_SUGGESTIONS =
 export const YOUTUBE_COMMENTS_API =
   "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=_VB39Jo8mAQ&key=" +
   Google_API_KEY;
+
+export const multipleVideoIDs =
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=MULTIPLEVIDEOIDs&key=" +
+  Google_API_KEY;
+// export const multipleVideoIDs =
+//   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=Ks-_Mh1QhMc%2Cc0KYU2j0TM4%2CeIho2S0ZahI&key=" +
+//   Google_API_KEY;

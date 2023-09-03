@@ -4,14 +4,24 @@ import { toggleMenu } from "../Store/MenuSlice";
 import searchImage from "../Utils/Images/search.png";
 import menuImage from "../Utils/Images/menu.png";
 import youtubeLogo from "../Utils/Images/youtubeLogo.png";
-import { YOUTUBE_SEARCH_SUGGESTIONS } from "../Utils/Constants";
+import {
+  YOUTUBE_SEARCH_SUGGESTIONS,
+  YOUTUBE_SEARCH_API,
+  YOUTUBE_ROPULAR_VIDEOS_URL,
+  multipleVideoIDs,
+} from "../Utils/Constants";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
+
+import { refreshList } from "../Store/VideosSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [searchKeywords, setSearchKeywords] = useState("");
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
+
+  //temp states
+  const [searchedData, setSearchedData] = useState([]);
+  const [idList, setidsList] = useState([]);
 
   const searchSuggestions = [
     "iphone",
@@ -22,7 +32,6 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    console.log(searchKeywords);
     let timer;
     if (searchKeywords.length > 0) {
       setShowSearchSuggestions(true);
@@ -36,7 +45,7 @@ const Header = () => {
   }, [searchKeywords]);
 
   const getSearchSuggestions = () => {
-    console.log("getSearchSuggestions");
+    //console.log("getSearchSuggestions");
   };
 
   const handleMenuClick = () => {
@@ -45,14 +54,37 @@ const Header = () => {
     //() => dispatch(toggleMenu())
   };
 
+  useEffect(() => {
+    console.log("searchedData useEffect Called");
+    const getvideoIDs = async () => {
+      // const videoIDs = searchedData.map((item) => item.id.videoId);
+      const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
+      console.log("idsString: ", idsString);
+      const idData = await fetch(
+        multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
+      );
+      const idJson = await idData.json();
+      setidsList(idJson?.items);
+      // console.log("idList: ", idList);
+    };
+    getvideoIDs();
+  }, [searchedData]);
+
+  useEffect(() => {
+    console.log("idList Called");
+    dispatch(refreshList(idList));
+  }, [idList]);
+
   const handleSearchClick = async () => {
-    setShowSearchSuggestions(false);
-    console.log(searchKeywords);
-    const data = await fetch(YOUTUBE_SEARCH_SUGGESTIONS);
-    console.log(data);
+    const data = await fetch(
+      YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords)
+    );
     const json = await data.json();
-    console.log(json);
+    // console.log("YOUTUBE_SEARCH_API - " + data);
+    // console.log("YOUTUBE_SEARCH_API - " + json);
+    setSearchedData(json?.items);
     setSearchKeywords("");
+    setShowSearchSuggestions(false);
   };
 
   return (

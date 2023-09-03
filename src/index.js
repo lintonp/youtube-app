@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 // import reportWebVitals from './reportWebVitals';
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import VideoContainer from "./Components/VideoContainer";
+// import VideoContainer from "./Components/VideoContainer";
 import MainContent from "./Components/MainContent";
 import Body from "./Components/Body";
+import VideoContainerShimmer from "./Components/ShimmerUI/VideoContainerShimmer";
+
+const VideoContainer = lazy(() => import("./Components/VideoContainer"));
 
 const router = createBrowserRouter([
   {
@@ -24,7 +27,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/watch",
-            element: <VideoContainer />,
+            element: (
+              <Suspense fallback={<VideoContainerShimmer />}>
+                <VideoContainer />
+              </Suspense>
+            ),
           },
         ],
       },
