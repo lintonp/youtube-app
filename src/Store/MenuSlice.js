@@ -10,8 +10,11 @@ const menuSlice = createSlice({
     collapseMenu: (state) => {
       state.show = false;
     },
+    showMenu: (state) => {
+      state.show = true;
+    },
   },
 });
 
-export const { toggleMenu, collapseMenu } = menuSlice.actions;
+export const { toggleMenu, collapseMenu, showMenu } = menuSlice.actions;
 export default menuSlice.reducer;

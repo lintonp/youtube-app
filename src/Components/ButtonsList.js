@@ -1,16 +1,18 @@
 import Button from "./Button";
-
+// create selected buttonSlice and store selected button, add CSS to selected button and load videos by this button
 const ButtonsList = () => {
   const allbuttons = [
     "All",
     "React",
-    "Javascript",
+    // "Javascript",
     "Tailwind CSS",
-    "HTML",
+    // "HTML",
     "React Router DOM",
     "Redux",
     "Lazy Loading",
     "Debouncing",
+    "n-Level nested comments",
+    "Live Chat",
   ];
   return (
     <div className="flex">
