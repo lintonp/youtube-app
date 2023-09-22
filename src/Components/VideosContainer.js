@@ -18,6 +18,7 @@ const VideosContainer = () => {
     const getVideosData = async () => {
       const data = await fetch(YOUTUBE_ROPULAR_VIDEOS_URL);
       const json = await data.json();
+      console.log("getVideosData", json);
       // console.log("json?.items", json?.items);
       // setVideosList(json?.items);
       dispatch(refreshList(json?.items));

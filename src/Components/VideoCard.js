@@ -7,14 +7,14 @@ const VideoCard = ({ data }) => {
     return num > 1000000
       ? parseFloat((num / 1000000).toFixed(1)) + "M"
       : num > 1000
-      ? num / 1000 + "K"
+      ? parseFloat((num / 1000).toFixed(0)) + "K"
       : num;
   };
 
   return (
     <div className="m-3 p-1 max-w-sm">
       <img
-        alt={"snippet.title"}
+        alt={snippet.title}
         src={thumbnail.url}
         className="w-[{thumbnail.width} px] h-48 rounded-md"
       />

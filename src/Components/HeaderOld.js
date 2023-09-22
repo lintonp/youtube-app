@@ -49,81 +49,43 @@ const Header = () => {
   };
 
   const handleMenuClick = () => {
+    console.log("clicked");
     dispatch(toggleMenu());
     //() => dispatch(toggleMenu())
   };
 
-  // useEffect(() => {
-  //   console.log("searchedData useEffect Called");
-  //   const getvideoIDs = async () => {
-  //     // const videoIDs = searchedData.map((item) => item.id.videoId);
-  //     const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
-  //     console.log("idsString: ", idsString);
-  //     const idData = await fetch(
-  //       multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
-  //     );
-  //     const idJson = await idData.json();
-  //     setidsList(idJson?.items);
-  //     // console.log("idList: ", idList);
-  //   };
-  //   getvideoIDs();
-  // }, [searchedData]);
+  useEffect(() => {
+    console.log("searchedData useEffect Called");
+    const getvideoIDs = async () => {
+      // const videoIDs = searchedData.map((item) => item.id.videoId);
+      const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
+      console.log("idsString: ", idsString);
+      const idData = await fetch(
+        multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
+      );
+      const idJson = await idData.json();
+      setidsList(idJson?.items);
+      // console.log("idList: ", idList);
+    };
+    getvideoIDs();
+  }, [searchedData]);
 
-  // useEffect(() => {
-  //   console.log("idList Called");
-  //   dispatch(refreshList(idList));
-  // }, [idList]);
+  useEffect(() => {
+    console.log("idList Called");
+    dispatch(refreshList(idList));
+  }, [idList]);
 
-  //trying diff methods
-  async function fetchSearchIDs() {
+  const handleSearchClick = async () => {
     const data = await fetch(
       YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords)
     );
     const json = await data.json();
+    // console.log("YOUTUBE_SEARCH_API - " + data);
+    // console.log("YOUTUBE_SEARCH_API - " + json);
     setSearchedData(json?.items);
-  }
-
-  async function fetchVideoByIDs() {
-    const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
-    console.log("idsString: ", idsString);
-    const idData = await fetch(
-      multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
-    );
-    const idJson = await idData.json();
-    setidsList(idJson?.items);
-  }
-
-  //Using .then without updating state multiple times
-  //Check why async await is not working in similar way
-  const handleSearchClick = async () => {
-    fetch(YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords))
-      .then((data) => data.json())
-      .then((json) => {
-        const idsString = json?.items
-          .map((item) => item.id.videoId)
-          .join("%2C");
-        //return idsString;
-        return fetch(multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString));
-      })
-      .then((idData) => idData.json())
-      .then((idJson) => {
-        // console.log(".then idJson: ", idJson);
-        dispatch(refreshList(idJson?.items));
-      });
     setSearchKeywords("");
     setShowSearchSuggestions(false);
   };
-  // const handleSearchClick = async () => {
-  //   const data = await fetch(
-  //     YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords)
-  //   );
-  //   const json = await data.json();
-  //   // console.log("YOUTUBE_SEARCH_API - " + data);
-  //   // console.log("YOUTUBE_SEARCH_API - " + json);
-  //   setSearchedData(json?.items);
-  //   setSearchKeywords("");
-  //   setShowSearchSuggestions(false);
-  // };
 
   return (
     <div className="flex justify-between mx-2 my-1 px-2 py-3">
