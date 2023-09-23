@@ -1,4 +1,14 @@
 import { Link } from "react-router-dom";
+import MenuItems from "./MenuItems";
+
+const interests = [
+  "PTX",
+  "Jason Mraz",
+  "Taylor Swift",
+  "Ed Sheeran",
+  "UCL",
+  "IPL",
+];
 
 const Menu = () => {
   return (
@@ -14,9 +24,9 @@ const Menu = () => {
         <li className="p-2 hover:shadow-md">Subscription</li>
         <li className="p-2 hover:shadow-md">Watch Later</li>
         <hr className="my-2" />
-        <li className="p-2 hover:shadow-md">PTX</li>
-        <li className="p-2 hover:shadow-md">Jason Mraz</li>
-        <li className="p-2 hover:shadow-md">Taylor Swift</li>
+        {interests.map((item) => (
+          <MenuItems key={item} name={item} />
+        ))}
       </ul>
     </div>
   );
