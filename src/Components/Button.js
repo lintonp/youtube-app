@@ -1,9 +1,12 @@
-import React from "react";
-import { YOUTUBE_SEARCH_API, multipleVideoIDs } from "../Utils/Constants";
+import {
+  YOUTUBE_ROPULAR_VIDEOS_URL,
+  YOUTUBE_SEARCH_API,
+  multipleVideoIDs,
+} from "../Utils/Constants";
 import { useDispatch } from "react-redux";
-import { refreshList } from "../Store/VideosSlice";
+import { refreshList, setIsLoading } from "../Store/VideosSlice";
 
-const Button = ({ name }) => {
+const Button = ({ name, isSelected, setSelectedButton }) => {
   const dispatch = useDispatch();
   const updateVideosSlice = async (list) => {
     const data = await fetch(
@@ -21,14 +24,26 @@ const Button = ({ name }) => {
     updateVideosSlice(list);
   };
 
+  const fetchAllVideos = async () => {
+    const data = await fetch(YOUTUBE_ROPULAR_VIDEOS_URL);
+    const json = await data.json();
+    dispatch(refreshList(json?.items));
+  };
+
   const handleOnclick = () => {
-    fetchVideos();
+    dispatch(setIsLoading());
+    name === "All" ? fetchAllVideos() : fetchVideos();
+    setSelectedButton(name);
   };
 
   return (
     <button
       onClick={handleOnclick}
-      className="py-1 px-2 m-2 text-sm rounded-md bg-slate-200 whitespace-nowrap hover:bg-slate-300"
+      className={
+        isSelected
+          ? "py-[6px] px-2 m-2 text-sm rounded-md bg-black whitespace-nowrap text-white font-semibold"
+          : "py-[6px] px-2 m-2 text-sm rounded-md bg-slate-200 whitespace-nowrap hover:bg-slate-300"
+      }
     >
       {name}
     </button>

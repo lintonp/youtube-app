@@ -5,13 +5,17 @@ const videosSlice = createSlice({
   name: "videos",
   initialState: {
     allVideos: [],
+    isLoading: false,
   },
   reducers: {
     refreshList: (state, action) => {
-      state.allVideos = action.payload;
+      return { allVideos: action.payload, isLoading: false };
+    },
+    setIsLoading: (state) => {
+      state.isLoading = true;
     },
   },
 });
 
-export const { refreshList } = videosSlice.actions;
+export const { refreshList, setIsLoading } = videosSlice.actions;
 export default videosSlice.reducer;

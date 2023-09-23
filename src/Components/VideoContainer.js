@@ -7,24 +7,16 @@ import CommentsContainer from "./CommentsContainer";
 
 const VideoContainer = () => {
   const dispatch = useDispatch();
-  const searchParams = new URLSearchParams(window.location.href);
-  // const [videoData, setVideoData] = useState({});
-  //console.log("Video Container");
-
-  // const fetchVideo = async () => {
-  //   // const ID = searchParams.get("v");
-  //   //console.log("fetchVideo");
-  //   const data = await fetch(YOUTUBE_VIDEO_URL);
-  //   const json = await data.json();
-  //   setVideoData(json);
-  //   //console.log("Video json data: ", json);
-  // };
+  // const searchParams = new URLSearchParams(document.location.href);
+  // const key = searchParams.get("v");
+  // console.log(key);
+  const videoUrl = window.location.href;
+  const match = videoUrl.match(/[?&]v=([^&]+)/);
+  const key = match ? match[1] : null;
 
   useEffect(() => {
-    //console.log("useEffect");
     dispatch(collapseMenu());
-    // fetchVideo();
-  }, [dispatch]); //Added dispatch for deploy in netlify
+  }, []);
 
   return (
     <div className="">
@@ -33,7 +25,8 @@ const VideoContainer = () => {
           <iframe
             width="800"
             height="450"
-            src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+            src={"https://www.youtube.com/embed/" + key + "?vq=hd720p"}
+            // src={"https://www.youtube.com/embed/" + searchParams.get("v")}
             title="YouTube video player"
             // frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -54,7 +47,7 @@ const VideoContainer = () => {
       </div>
       <div>
         {/* <CommentsContainer /> */}
-        <CommentsContainer id={searchParams.get("v")} />
+        <CommentsContainer id={key} />
       </div>
     </div>
   );
