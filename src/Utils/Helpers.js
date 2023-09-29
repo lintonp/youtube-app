@@ -63,3 +63,17 @@ export function generateRandomString(length) {
 
   return randomString;
 }
+
+export function addCommasToNumberString(numberString) {
+  const reversed = numberString.split("").reverse();
+  let formatted = "";
+
+  for (let i = 0; i < reversed.length; i++) {
+    formatted += reversed[i];
+    if ((i + 1) % 3 === 0 && i !== reversed.length - 1) {
+      formatted += ",";
+    }
+  }
+
+  return formatted.split("").reverse().join("");
+}

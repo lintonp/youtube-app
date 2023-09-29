@@ -5,7 +5,6 @@ import App from "./App";
 // import reportWebVitals from './reportWebVitals';
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-// import VideoContainer from "./Components/VideoContainer";
 import MainContent from "./Components/MainContent";
 import Body from "./Components/Body";
 import VideoContainerShimmer from "./Components/ShimmerUI/VideoContainerShimmer";

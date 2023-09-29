@@ -15,6 +15,8 @@ const VideosContainer = () => {
   const isLoading = useSelector((store) => store.videos.isLoading);
   const dispatch = useDispatch();
 
+  console.log("videosList", videosList);
+
   useEffect(() => {
     const getVideosData = async () => {
       const data = await fetch(YOUTUBE_ROPULAR_VIDEOS_URL);

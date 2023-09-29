@@ -29,7 +29,7 @@ const LiveChat = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <h2 className="ml-4 justify-center font-semibold">Live Chat</h2>
       <div className="mx-2 p-2 bg-slate-50 shadow-md w-full h-[425px] overflow-y-scroll flex flex-col-reverse divide-y divide-slate-200">
         {liveChat.map((item, index) => (

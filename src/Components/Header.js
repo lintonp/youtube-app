@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../Store/MenuSlice";
 import searchImage from "../Utils/Images/search.png";
 import menuImage from "../Utils/Images/menu.png";
 import youtubeLogo from "../Utils/Images/youtubeLogo.png";
-import {
-  YOUTUBE_SEARCH_SUGGESTIONS,
-  YOUTUBE_SEARCH_API,
-  YOUTUBE_ROPULAR_VIDEOS_URL,
-  multipleVideoIDs,
-} from "../Utils/Constants";
-import { Link } from "react-router-dom";
+import { YOUTUBE_SEARCH_API, multipleVideoIDs } from "../Utils/Constants";
+import { Link, useNavigate } from "react-router-dom";
 
 import { refreshList } from "../Store/VideosSlice";
+import { updateSearchHistory } from "../Store/SearchSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const searchHistory = useSelector((store) => store.search.searchHistory);
   const [searchKeywords, setSearchKeywords] = useState("");
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
-
-  //temp states
-  const [searchedData, setSearchedData] = useState([]);
-  const [idList, setidsList] = useState([]);
 
   const searchSuggestions = [
     "iphone",
@@ -30,6 +24,8 @@ const Header = () => {
     "iphone 13",
     "iphone 13 Max Pro",
   ];
+  // console.log("hist", searchHistory);
+  // searchSuggestions.push(searchHistory);
 
   useEffect(() => {
     let timer;
@@ -53,48 +49,6 @@ const Header = () => {
     //() => dispatch(toggleMenu())
   };
 
-  // useEffect(() => {
-  //   console.log("searchedData useEffect Called");
-  //   const getvideoIDs = async () => {
-  //     // const videoIDs = searchedData.map((item) => item.id.videoId);
-  //     const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
-  //     console.log("idsString: ", idsString);
-  //     const idData = await fetch(
-  //       multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
-  //     );
-  //     const idJson = await idData.json();
-  //     setidsList(idJson?.items);
-  //     // console.log("idList: ", idList);
-  //   };
-  //   getvideoIDs();
-  // }, [searchedData]);
-
-  // useEffect(() => {
-  //   console.log("idList Called");
-  //   dispatch(refreshList(idList));
-  // }, [idList]);
-
-  //trying diff methods
-  async function fetchSearchIDs() {
-    const data = await fetch(
-      YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords)
-    );
-    const json = await data.json();
-    setSearchedData(json?.items);
-  }
-
-  async function fetchVideoByIDs() {
-    const idsString = searchedData.map((item) => item.id.videoId).join("%2C");
-    console.log("idsString: ", idsString);
-    const idData = await fetch(
-      multipleVideoIDs.replace("MULTIPLEVIDEOIDs", idsString)
-    );
-    const idJson = await idData.json();
-    setidsList(idJson?.items);
-  }
-
-  //Using .then without updating state multiple times
-  //Check why async await is not working in similar way
   const handleSearchClick = async () => {
     fetch(YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords))
       .then((data) => data.json())
@@ -112,18 +66,9 @@ const Header = () => {
       });
     setSearchKeywords("");
     setShowSearchSuggestions(false);
+    dispatch(updateSearchHistory(searchKeywords));
+    navigate("/");
   };
-  // const handleSearchClick = async () => {
-  //   const data = await fetch(
-  //     YOUTUBE_SEARCH_API.replace("searchKeyword", searchKeywords)
-  //   );
-  //   const json = await data.json();
-  //   // console.log("YOUTUBE_SEARCH_API - " + data);
-  //   // console.log("YOUTUBE_SEARCH_API - " + json);
-  //   setSearchedData(json?.items);
-  //   setSearchKeywords("");
-  //   setShowSearchSuggestions(false);
-  // };
 
   return (
     <div className="flex justify-between mx-2 my-1 px-2 py-3">
@@ -148,7 +93,6 @@ const Header = () => {
               setShowSearchSuggestions(true);
               setSearchKeywords(e.target.value);
             }}
-            // onBlur={setShowSearchSuggestions(false)}
           />
           <button
             className="p-2 border border-1 rounded-r-full"

@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { collapseMenu } from "../Store/MenuSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LiveChat from "./LiveChat";
 import CommentsContainer from "./CommentsContainer";
-// import { YOUTUBE_VIDEO_URL } from "../Utils/Constants";
+import VideoDetails from "./VideoDetails";
 
 const VideoContainer = () => {
   const dispatch = useDispatch();
+  const [videoData, setVideoData] = useState(null);
   // const searchParams = new URLSearchParams(document.location.href);
   // const key = searchParams.get("v");
   // console.log(key);
@@ -14,30 +15,27 @@ const VideoContainer = () => {
   const match = videoUrl.match(/[?&]v=([^&]+)/);
   const key = match ? match[1] : null;
 
+  const videosList = useSelector((store) => store.videos.allVideos);
+
   useEffect(() => {
     dispatch(collapseMenu());
+    setVideoData(videosList.filter((item) => item.id === key)[0]);
   }, []);
 
   return (
     <div className="">
-      <div className="flex m-2">
+      <div className="flex my-2 ml-8">
         <div className="">
           <iframe
+            className="rounded-xl"
             width="800"
             height="450"
             src={"https://www.youtube.com/embed/" + key + "?vq=hd720p"}
-            // src={"https://www.youtube.com/embed/" + searchParams.get("v")}
             title="YouTube video player"
-            // frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-          <h1 className="mt-1 text-lg">
-            Title
-            {/* {videoData === {}
-              ? "Loading..."
-              : videoData?.items[0]?.snippet.title} */}
-          </h1>
+          {videoData && <VideoDetails videoData={videoData} />}
         </div>
         {/* <div className="mx-2 p-2 shadow-md h-[450px] overflow-y-scroll"> */}
         <div width="250">
@@ -46,7 +44,6 @@ const VideoContainer = () => {
         </div>
       </div>
       <div>
-        {/* <CommentsContainer /> */}
         <CommentsContainer id={key} />
       </div>
     </div>

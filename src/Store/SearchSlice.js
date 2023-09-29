@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const SearchSlice = createSlice({
   name: "Search",
-  initialState: [],
+  initialState: {
+    searchHistory: [],
+  },
   reducers: {
-    additem: (state, action) => {
-      if (!state.contains(action.payload)) {
-        state.push(action.payload);
-      }
+    updateSearchHistory: (state, action) => {
+      state.searchHistory.push(action.payload);
     },
   },
 });
 
-export const { additem } = SearchSlice.actions;
+export const { updateSearchHistory } = SearchSlice.actions;
 export default SearchSlice.reducer;

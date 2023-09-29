@@ -14,10 +14,11 @@ const CommentsContainer = ({ id }) => {
   const fetchComments = async () => {
     const data = await fetch(YOUTUBE_COMMENTS_API);
     const json = await data.json();
-    console.log("comments", json);
+    // console.log("comments", json);
   };
+
   return (
-    <div className="m-2 mb-4 px-1">
+    <div className="m-2 mb-4 px-1 ml-8">
       <h1 className="font-bold mb-1">Comments:</h1>
       <div className="mx-2 divide-y divide-slate-200">
         <CommentsList comments={COMMENTS_DATA} />

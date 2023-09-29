@@ -12,10 +12,7 @@ function App() {
     <div>
       <Provider store={AppStore}>
         <Header />
-        {/* <RouterProvider router={router}> */}
         <Outlet />
-        {/* <Body /> */}
-        {/* </RouterProvider> */}
       </Provider>
     </div>
   );
